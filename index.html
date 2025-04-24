@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+    <title>Vivienda Ideal | Casas en México</title>
+    <meta name="description" content="Encuentra tu nuevo hogar en México con Vivienda Ideal. Propiedades seleccionadas, precios accesibles y atención personalizada.">
+  
+    <!-- Open Graph para redes sociales -->
+    <meta property="og:title" content="Vivienda Ideal | Encuentra tu nuevo hogar" />
+    <meta property="og:description" content="Casas modernas en ubicaciones privilegiadas con precios accesibles." />
+    <meta property="og:image" content="https://source.unsplash.com/600x400/?home" />
+    <meta property="og:url" content="https://tusitio.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  
+  <body class="bg-gray-50 text-gray-900 font-sans">
+
+<!-- Header -->
+<header class="bg-white shadow" x-data="{ open: false }">
+  <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+    
+    <!-- Nombre del sitio -->
+    <h1 class="text-2xl font-bold text-blue-800">Vivienda Ideal</h1>
+
+    <!-- Botón de menú móvil accesible -->
+    <button 
+      @click="open = !open"
+      class="text-blue-800 md:hidden focus:outline-none"
+      :aria-expanded="open.toString()"
+      aria-controls="nav-principal"
+      aria-label="Alternar menú de navegación"
+    >
+      <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Navegación -->
+    <nav 
+      :class="open ? 'block' : 'hidden'" 
+      id="nav-principal"
+      aria-label="Navegación principal"
+      class="absolute md:static bg-white left-0 w-full top-full mt-2 md:mt-0 md:flex md:items-center md:space-x-6 md:w-auto md:space-y-0 space-y-4 px-4 md:px-0 py-4 md:py-0 z-50 shadow md:shadow-none"
+    >
+      <ul class="flex flex-col md:flex-row gap-4 md:gap-8 text-sm font-medium text-center w-full md:w-auto">
+        <li>
+          <a href="#" class="relative inline-block py-2 text-gray-700 transition duration-300 hover:text-blue-800">
+            Inicio
+            <span class="absolute left-0 bottom-0 w-full h-[2px] bg-blue-800 scale-x-0 origin-left transition-transform duration-300 hover:scale-x-100"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#propiedades" class="relative inline-block py-2 text-gray-700 transition duration-300 hover:text-blue-800">
+            Propiedades
+            <span class="absolute left-0 bottom-0 w-full h-[2px] bg-blue-800 scale-x-0 origin-left transition-transform duration-300 hover:scale-x-100"></span>
+          </a>
+        </li>
+        <li>
+          <a href="#contacto" class="relative inline-block py-2 text-gray-700 transition duration-300 hover:text-blue-800">
+            Contacto
+            <span class="absolute left-0 bottom-0 w-full h-[2px] bg-blue-800 scale-x-0 origin-left transition-transform duration-300 hover:scale-x-100"></span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+
+<!-- Hero -->
+<section
+  class="relative h-[70vh] bg-cover bg-center bg-no-repeat"
+  style="background-image: url('https://plus.unsplash.com/premium_photo-1680185461986-f4655414868c?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"
+  role="banner"
+  aria-label="Sección principal de introducción"
+>
+  <!-- Overlay oscuro para contraste de texto -->
+  <div class="absolute inset-0 bg-blue-900 bg-opacity-60"></div>
+
+  <!-- Contenido -->
+  <div class="relative z-10 max-w-3xl mx-auto h-full flex flex-col justify-center items-center text-center text-white px-6">
+    <h2 class="text-4xl font-bold mb-4 animate-fade-in-down drop-shadow-md">
+      Encuentra tu nuevo hogar
+    </h2>
+    <p class="text-lg mb-8 animate-fade-in-up drop-shadow-sm">
+      Casas modernas, ubicaciones privilegiadas, precios accesibles.
+    </p>
+    <a
+      href="#propiedades"
+      class="bg-white text-blue-800 font-semibold px-6 py-3 rounded-lg shadow hover:bg-gray-100 transition animate-fade-in-up focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+    >
+      Ver Propiedades
+    </a>
+  </div>
+</section>
+
+<!-- Propiedades destacadas -->
+<section id="propiedades" class="py-20 bg-gray-100">
+  <div x-data="propiedadesApp()" class="max-w-7xl mx-auto px-4 space-y-8">
+
+    <!-- Filtros -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 text-sm text-gray-700 font-medium"
+         x-intersect="$el.classList.add('animate-fade-in')">
+      <!-- Selector de ciudad -->
+      <label class="flex flex-col">
+        Ciudad:
+        <select x-model="ciudadSeleccionada" class="w-full mt-1 border p-2 rounded">
+          <option value="">Todas</option>
+          <template x-for="ciudad in ciudades" :key="ciudad">
+            <option :value="ciudad" x-text="ciudad"></option>
+          </template>
+        </select>
+      </label>
+
+      <!-- Precio mínimo -->
+      <label class="flex flex-col">
+        Precio mínimo:
+        <input
+          type="number"
+          x-model.number="precioMin"
+          class="w-full mt-1 border p-2 rounded"
+          placeholder="ej. 2000000"
+          min="2000000"
+          max="3500000"
+        />
+        <p x-show="precioMin && precioMin < 2000000" class="text-red-500 text-xs mt-1">
+          ❌ No puede ser menor a $2,000,000
+        </p>
+      </label>
+
+      <!-- Precio máximo -->
+      <label class="flex flex-col">
+        Precio máximo:
+        <input
+          type="number"
+          x-model.number="precioMax"
+          class="w-full mt-1 border p-2 rounded"
+          placeholder="ej. 3500000"
+          min="2000000"
+          max="3500000"
+        />
+        <p x-show="precioMax && precioMax > 3500000" class="text-red-500 text-xs mt-1">
+          ❌ No puede exceder $3,500,000
+        </p>
+      </label>
+
+      <!-- Botón Limpiar -->
+      <div class="col-span-1 md:col-span-3 flex justify-center pt-4">
+        <button
+          @click="limpiarFiltros"
+          class="bg-blue-800 text-white font-semibold px-6 py-2 rounded hover:bg-blue-700 transition"
+        >
+          Limpiar filtros
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+         x-intersect="$el.classList.add('animate-fade-in')">
+      <template x-for="propiedad in propiedadesFiltradas()" :key="propiedad.nombre">
+        <div
+          class="bg-white rounded-xl shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+        >
+          <!-- Imagen -->
+          <div class="overflow-hidden">
+            <img
+              :src="propiedad.imagen"
+              :alt="propiedad.nombre"
+              class="w-full h-48 object-cover hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+
+          <!-- Contenido -->
+          <div class="p-6 space-y-3">
+            <h3 class="text-xl font-bold text-blue-800" x-text="propiedad.nombre"></h3>
+
+            <div class="flex items-center text-gray-600 gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9.75 17l-.97-.97A3.75 3.75 0 0112 9.75v0a3.75 3.75 0 013.75 3.75v0a3.75 3.75 0 01-3.75 3.75H9.75z" />
+              </svg>
+              <span x-text="propiedad.descripcion"></span>
+            </div>
+
+            <div class="flex items-center text-gray-600 gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17.657 16.657L13.414 12l4.243-4.243M6.343 7.343L10.586 12l-4.243 4.243" />
+              </svg>
+              <span>Ciudad: <span x-text="propiedad.ciudad"></span></span>
+            </div>
+
+            <div class="text-blue-800 font-bold text-lg"
+                 x-text="`$${propiedad.precio.toLocaleString('es-MX')} MXN`"></div>
+          </div>
+        </div>
+      </template>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- Testimonio -->
+<section class="py-20 bg-white">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-blue-800 mb-12" data-aos="zoom-in">
+      Lo que dicen nuestros clientes
+    </h2>
+
+    <!-- Slider de testimonios -->
+    <div id="testimonial-slider" class="relative overflow-hidden">
+      <div id="testimonial-track" class="flex transition-transform duration-700 ease-in-out">
+        <!-- Testimonio 1 -->
+        <div class="min-w-full px-4">
+          <div class="bg-gray-100 p-6 rounded-lg shadow">
+            <p class="text-gray-700 italic mb-4">
+              “Gracias a Vivienda Ideal encontré la casa perfecta para mi familia.”
+            </p>
+            <p class="font-semibold text-blue-800">Ana López</p>
+            <p class="text-sm text-gray-500">Compradora - CDMX</p>
+          </div>
+        </div>
+
+        <!-- Testimonio 2 -->
+        <div class="min-w-full px-4">
+          <div class="bg-gray-100 p-6 rounded-lg shadow">
+            <p class="text-gray-700 italic mb-4">
+              “Su atención al cliente fue increíble. Me asesoraron en todo momento.”
+            </p>
+            <p class="font-semibold text-blue-800">Carlos Ramírez</p>
+            <p class="text-sm text-gray-500">Inversionista - Querétaro</p>
+          </div>
+        </div>
+
+        <!-- Puedes agregar más testimonios aquí -->
+      </div>
+    </div>
+
+    <!-- Controles de navegación -->
+    <div class="flex justify-center mt-6 space-x-4">
+      <button id="prev-testimonial" class="text-blue-800 hover:underline">← Anterior</button>
+      <button id="next-testimonial" class="text-blue-800 hover:underline">Siguiente →</button>
+    </div>
+  </div>
+</section>
+
+<!-- Contacto -->
+<section id="contacto" class="py-20 bg-gray-100">
+  <div class="max-w-3xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center text-blue-800 mb-10" data-aos="fade-up">Contáctanos</h2>
+
+    <div 
+      x-data 
+      x-transition:enter="transition-opacity duration-700"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+    >
+      <form
+        id="contactForm"
+        class="bg-white p-8 rounded-lg shadow space-y-6"
+        novalidate
+        aria-label="Formulario de contacto"
+      >
+        <!-- Nombre -->
+        <div>
+          <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            autocomplete="name"
+            required
+            aria-required="true"
+            placeholder="Ingresa tu nombre"
+            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-800 shadow-sm"
+          />
+        </div>
+
+        <!-- Correo -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            required
+            aria-required="true"
+            placeholder="tucorreo@ejemplo.com"
+            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-800 shadow-sm"
+          />
+        </div>
+
+        <!-- Mensaje -->
+        <div>
+          <label for="mensaje" class="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+          <textarea
+            id="mensaje"
+            name="mensaje"
+            rows="4"
+            required
+            aria-required="true"
+            placeholder="Escribe tu mensaje aquí..."
+            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-800 shadow-sm resize-y"
+          ></textarea>
+        </div>
+
+        <!-- Botón de enviar -->
+        <div class="text-center">
+          <button
+            type="submit"
+            class="w-full sm:w-auto px-6 py-3 bg-blue-800 text-white font-semibold rounded-md hover:bg-blue-700 transition"
+          >
+            Enviar mensaje
+          </button>
+        </div>
+
+        <!-- Mensaje de éxito -->
+        <p id="formFeedback" class="text-center text-sm text-green-600 hidden mt-4">
+          ✅ Tu mensaje ha sido enviado. ¡Gracias!
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="w-full bg-blue-800 text-white">
+  <!-- Contenido centrado, pero fondo full-width -->
+  <div class="w-full mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+    <!-- Información de contacto -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Vivienda Ideal</h3>
+      <ul class="space-y-2">
+        <li class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Av. Reforma 123, CDMX
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.36 11.36 0 003.56.57 1 1 0 011 1v3.59a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.6a1 1 0 011 1 11.36 11.36 0 00.57 3.56 1 1 0 01-.21 1.11z"/></svg>
+          (55) 1234-5678
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 24 24"><path d="M2 4h20v16H2z" fill="none"/><polyline points="2,4 12,13 22,4"/><polyline points="2,20 12,11 22,20"/></svg>
+          <a href="mailto:contacto@viviendaideal.mx" class="underline hover:text-gray-200">
+            contacto@viviendaideal.mx
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Enlaces -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Enlaces</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:text-gray-300 transition">Inicio</a></li>
+        <li><a href="#propiedades" class="hover:text-gray-300 transition">Propiedades</a></li>
+        <li><a href="#contacto" class="hover:text-gray-300 transition">Contacto</a></li>
+      </ul>
+    </div>
+
+    <!-- Redes sociales -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Síguenos</h3>
+      <div class="flex items-center space-x-6">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-gray-300 transition">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.877v-6.99h-2.54v-2.887h2.54V9.797c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.772-1.63 1.562v1.875h2.773l-.443 2.887h-2.33V21.877C18.343 21.128 22 16.991 22 12z"/>
+          </svg>
+        </a>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-gray-300 transition">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 100 10 5 5 0 000-10zm0 1.5a3.5 3.5 0 110 7 3.5 3.5 0 010-7zm5-1.75a1 1 0 100 2 1 1 0 000-2z"/>
+          </svg>
+        </a>
+        <!-- WhatsApp -->
+        <a href="https://wa.me/5215512345678" target="_blank" rel="noopener" aria-label="WhatsApp" class="hover:text-gray-300 transition">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.52 3.48A11.9 11.9 0 0012 0C5.37 0 0 5.37 0 12a11.87 11.87 0 001.67 6.12L0 24l6.22-1.63A12 12 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.25-6.19-3.48-8.52zM12 22a9.94 9.94 0 01-5.07-1.38l-.36-.22-3.69.97.98-3.59-.24-.38A9.94 9.94 0 012 12c0-5.52 4.48-10 10-10s10 4.48 10 10-4.48 10-10 10zm5.31-7.69c-.26-.13-1.54-.76-1.78-.85-.24-.09-.41-.13-.59.13-.17.26-.68.85-.84 1.02-.15.17-.31.2-.57.07s-1.11-.41-2.11-1.32c-.78-.7-1.3-1.56-1.45-1.82-.15-.26-.02-.4.11-.53.11-.11.26-.28.4-.42.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45s-.59-1.41-.81-1.92c-.21-.51-.43-.44-.59-.45h-.5c-.17 0-.45.06-.68.26s-.89.87-.89 2.12.91 2.47 1.04 2.65c.13.17 1.78 2.7 4.3 3.78.6.26 1.06.42 1.43.54.6.19 1.14.17 1.57.1.48-.07 1.54-.63 1.76-1.23.22-.6.22-1.11.15-1.23-.07-.12-.24-.2-.5-.33z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Banda inferior full-width -->
+  <div class="w-full bg-blue-900 py-4">
+    <p class="text-center text-xs text-white">
+      &copy; 2025 Vivienda Ideal. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>
+
+<!-- Script principal -->
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
