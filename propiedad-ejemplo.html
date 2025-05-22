@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vivienda Ideal | Tu Hogar Soñado en México</title>
+    <meta name="description" content="Descubre propiedades exclusivas en las mejores ubicaciones de México. Vivienda Ideal te acompaña en cada paso hacia tu nuevo hogar." />
+
+    <meta property="og:title" content="Vivienda Ideal | Encuentra tu Nuevo Hogar con Expertos" />
+    <meta property="og:description" content="Explora nuestra selección de casas y departamentos en México. Asesoría personalizada y las mejores oportunidades inmobiliarias." />
+    <meta property="og:image" content="https://source.unsplash.com/1200x630/?modern+house+exterior,luxury" />
+    <meta property="og:url" content="https://tusitio.com" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Vivienda Ideal | Tu Hogar Soñado en México" />
+    <meta name="twitter:description" content="Propiedades exclusivas y asesoría experta para encontrar tu vivienda ideal en México." />
+    <meta name="twitter:image" content="https://source.unsplash.com/1200x600/?modern+house+interior,bright" />
+
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+<!-- Header -->
+<header class="bg-white shadow" x-data="{ open: false }">
+    <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+      
+      <!-- Nombre del sitio -->
+      <h1 class="text-2xl font-bold text-blue-800">Vivienda Ideal</h1>
+  
+      <!-- Botón de menú móvil accesible -->
+      <button 
+        @click="open = !open"
+        class="text-blue-800 md:hidden focus:outline-none"
+        :aria-expanded="open.toString()"
+        aria-controls="nav-principal"
+        aria-label="Alternar menú de navegación"
+      >
+        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+  
+      <!-- Navegación -->
+      <nav 
+        :class="open ? 'block' : 'hidden'" 
+        id="nav-principal"
+        aria-label="Navegación principal"
+        class="absolute md:static bg-white left-0 w-full top-full mt-2 md:mt-0 md:flex md:items-center md:space-x-6 md:w-auto md:space-y-0 space-y-4 px-4 md:px-0 py-4 md:py-0 z-50 shadow md:shadow-none"
+      >
+      <ul class="flex flex-col md:flex-row gap-6 md:gap-10 text-base md:text-lg font-medium">
+          <li>
+            <a href="#"
+            class="relative inline-block px-4 py-3 text-gray-700 hover:text-blue-800 transition-colors duration-300">
+  
+            Inicio
+              <span class="absolute left-0 bottom-0 w-full h-[2px] bg-blue-800 scale-x-0 origin-left transition-transform duration-300 hover:scale-x-100"></span>
+            </a>
+          </li>
+          <li>
+            <a href="#propiedades" 
+            class="relative inline-block px-4 py-3 text-gray-700 hover:text-blue-800 transition-colors duration-300"
+            >
+              Propiedades
+              <span class="absolute left-0 bottom-0 w-full h-[2px] bg-blue-800 scale-x-0 origin-left transition-transform duration-300 hover:scale-x-100"></span>
+            </a>
+          </li>
+          <li>
+            <a href="#contacto" 
+            class="relative inline-block px-4 py-3 text-gray-700 hover:text-blue-800 transition-colors duration-300"
+  
+            >
+              Contacto
+              <span class="absolute left-0 bottom-0 w-full h-[2px] bg-blue-800 scale-x-0 origin-left transition-transform duration-300 hover:scale-x-100"></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+  
+    </div>
+  </header>
+    <main>
+        </main>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('navOpen', {
+                on: false,
+                toggle() { this.on = !this.on },
+                off() { this.on = false }
+            })
+        })
+    </script>
+</body>
+</html>

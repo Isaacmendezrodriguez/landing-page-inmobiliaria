@@ -8,8 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@alpinejs/intersect": "^3.14.9",
     "alpinejs": "^3.13.0",
-    "aos": "^2.3.4"
+    "aos": "^2.3.4",
+    "framer-motion": "^12.9.2",
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
