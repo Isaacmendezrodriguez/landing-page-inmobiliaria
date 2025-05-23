@@ -20,9 +20,40 @@ window.propiedadesApp = function() {
     precioMin: '',
     precioMax: '',
     propiedades: [
-      { nombre: "Casa Moderna",    descripcion: "3 recámaras, 2 baños",     ciudad: "CDMX",      precio: 3200000, imagen: "/images/propiedades/casa-moderna.webp" },
-      { nombre: "Casa Campestre",  descripcion: "Jardín amplio, exc clima", ciudad: "Querétaro", precio: 2100000, imagen: "/images/propiedades/casa-campestre.webp" },
-      { nombre: "Casa Minimalista",descripcion: "Diseño moderno, 2 niveles", ciudad: "CDMX",      precio: 2850000, imagen: "/images/propiedades/casa-minimalista.webp" }
+      { 
+        id: "casa-moderna", // ID para la primera
+        nombre: "Casa Moderna",
+        descripcion: "3 recámaras, 2 baños",
+        ciudad: "CDMX",
+        precio: 3200000,
+        imagen: "/images/propiedades/casa-moderna.webp",
+        imagenes: [
+          "/images/propiedades/casa-moderna.webp", // Puedes incluir la principal aquí también
+          "/images/propiedades/casa-moderna/sala.webp",
+          "/images/propiedades/casa-moderna/cocina.webp",
+          "/images/propiedades/casa-moderna/recamara1.webp",
+          "/images/propiedades/casa-moderna/jardin.webp"
+          // Añade más rutas si tienes más imágenes para Casa Moderna
+        ],
+        
+
+      },
+      { 
+        id: "casa-campestre", // <--- AÑADE ESTE ID
+        nombre: "Casa Campestre",
+        descripcion: "Jardín amplio, exc clima",
+        ciudad: "Querétaro",
+        precio: 2100000,
+        imagen: "/images/propiedades/casa-campestre.webp"
+      },
+      { 
+        id: "casa-minimalista", // <--- AÑADE ESTE ID
+        nombre: "Casa Minimalista",
+        descripcion: "Diseño moderno, 2 niveles",
+        ciudad: "CDMX",
+        precio: 2850000,
+        imagen: "/images/propiedades/casa-minimalista.webp"
+      }
     ],
     get ciudades() {
       return [...new Set(this.propiedades.map(p => p.ciudad))];

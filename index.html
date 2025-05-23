@@ -225,18 +225,17 @@
 
 
 
-<!-- Propiedades destacadas -->
-<section id="propiedades" class="py-20 bg-gray-100">
-  <div x-data="propiedadesApp()" class="max-w-7xl mx-auto px-4">
 
-    <!-- Título de sección -->
+
+    <!-- Cards -->
+<section id="propiedades" class="py-20 bg-gray-100">
+ <div x-data="propiedadesApp()" class="max-w-7xl mx-auto px-4">
+
     <h2 class="text-3xl font-bold text-center text-blue-800 mb-12" data-aos="fade-up">
       Propiedades destacadas
     </h2>
 
-    <!-- Filtros -->
     <form class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-gray-700" novalidate>
-      <!-- Ciudad -->
       <label class="flex flex-col" data-aos="fade-up" data-aos-delay="100">
         Ciudad:
         <select x-model="ciudadSeleccionada" class="mt-1 border rounded p-2 focus:ring-2 focus:ring-blue-500">
@@ -247,39 +246,36 @@
         </select>
       </label>
 
-      <!-- Precio mínimo -->
       <label class="flex flex-col" data-aos="fade-up" data-aos-delay="200">
         Precio mínimo:
         <input
           type="number"
           x-model.number="precioMin"
           class="mt-1 border rounded p-2 focus:ring-2 focus:ring-blue-500"
-          placeholder="2 000 000"
+          placeholder="2000000"
           min="2000000"
           max="3500000"
         />
         <span x-show="precioMin && precioMin < 2000000" class="text-red-500 text-xs mt-1">
-          ❌ No puede ser menor a $2 000 000
+          ❌ No puede ser menor a $2,000,000
         </span>
       </label>
 
-      <!-- Precio máximo -->
       <label class="flex flex-col" data-aos="fade-up" data-aos-delay="300">
         Precio máximo:
         <input
           type="number"
           x-model.number="precioMax"
           class="mt-1 border rounded p-2 focus:ring-2 focus:ring-blue-500"
-          placeholder="3 500 000"
+          placeholder="3500000"
           min="2000000"
           max="3500000"
         />
         <span x-show="precioMax && precioMax > 3500000" class="text-red-500 text-xs mt-1">
-          ❌ No puede exceder $3 500 000
+          ❌ No puede exceder $3,500,000
         </span>
       </label>
 
-      <!-- Limpiar filtros -->
       <div class="md:col-span-3 flex justify-center" data-aos="fade-up" data-aos-delay="400">
         <button
           type="button"
@@ -291,70 +287,40 @@
       </div>
     </form>
 
-    <!-- Cards -->
-    <section id="propiedades" class="py-20 bg-gray-100">
-      <div x-data="propiedadesApp()" class="max-w-7xl mx-auto px-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          <template x-for="(propiedad, i) in propiedadesFiltradas()" :key="propiedad.id">
-            <a :href="'/propiedad-' + propiedad.id + '.html'" class="block bg-white rounded-xl shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl group"
-               data-aos="fade-up"
-               :data-aos-delay="100 * (i + 1)">
-              <div class="overflow-hidden"> <img
-                  :src="propiedad.imagen"
-                  :alt="propiedad.nombre"
-                  class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-    
-              <div class="p-6 space-y-3">
-                <h3 class="text-xl font-semibold text-blue-800" x-text="propiedad.nombre"></h3>
-                <p class="text-gray-600 text-sm" x-text="propiedad.descripcion"></p>
-                <p class="text-sm text-gray-500">
-                  Ciudad: <span x-text="propiedad.ciudad"></span>
-                </p>
-                <p class="text-lg font-bold text-blue-800" x-text="`$${propiedad.precio.toLocaleString('es-MX')} MXN`"></p>
-                <span class="inline-block mt-2 bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg group-hover:bg-blue-700 transition-colors duration-300 text-sm">
-                  Ver Detalles
-                </span>
-              </div>
-            </a>
-          </template>
-        </div>
-      </div>
-    </section>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-      <!-- Mostrar mensaje si no hay coincidencias -->
+      
       <template x-if="propiedadesFiltradas().length === 0">
-        <p class="md:col-span-3 text-center text-gray-500 italic" data-aos="fade-up">
+        <p class="sm:col-span-2 lg:col-span-3 text-center text-gray-500 italic py-8" data-aos="fade-up">
           No se encontraron propiedades con esos criterios.
         </p>
       </template>
 
-      <template x-for="(propiedad, i) in propiedadesFiltradas()" :key="propiedad.nombre">
-        <div
-          class="bg-white rounded-xl shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl"
-          data-aos="fade-up"
-          :data-aos-delay="100 * (i + 1)"
-        >
-          <!-- Imagen -->
-          <img
-            :src="propiedad.imagen"
-            :alt="propiedad.nombre"
-            class="w-full h-48 object-cover hover:scale-110 transition-transform duration-500"
-          />
-
-          <!-- Contenido -->
+      <template x-for="(propiedad, i) in propiedadesFiltradas()" :key="propiedad.id">
+        <a :href="'/propiedad-' + propiedad.id + '.html'" class="block bg-white rounded-xl shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl group"
+           data-aos="fade-up"
+           :data-aos-delay="100 * (i + 1)">
+          <div class="overflow-hidden"> 
+            <img :src="propiedad.imagen"
+                 :alt="propiedad.nombre"
+                 class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+          </div>
           <div class="p-6 space-y-3">
             <h3 class="text-xl font-semibold text-blue-800" x-text="propiedad.nombre"></h3>
-            <p class="text-gray-600" x-text="propiedad.descripcion"></p>
+            <p class="text-gray-600 text-sm" x-text="propiedad.descripcion"></p>
             <p class="text-sm text-gray-500">
               Ciudad: <span x-text="propiedad.ciudad"></span>
             </p>
             <p class="text-lg font-bold text-blue-800" x-text="`$${propiedad.precio.toLocaleString('es-MX')} MXN`"></p>
+            <span class="inline-block mt-2 bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg group-hover:bg-blue-700 transition-colors duration-300 text-sm">
+              Ver Detalles
+            </span>
           </div>
-        </div>
+        </a>
       </template>
-    </div>
+    </div> 
+  </div> 
+</section>
+    
 
   </div>
 </section>
