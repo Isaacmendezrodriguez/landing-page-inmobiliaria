@@ -3,13 +3,16 @@ import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: '/',
+  base: './',  // Cambiado a relativo para Netlify
   server: {
     port: 3000,
     open: true, // Abre automáticamente el navegador
     host: true // Necesario para acceder desde la red local
   },
   build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    emptyOutDir: true,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
@@ -21,8 +24,12 @@ export default defineConfig({
         casaFamiliar: resolve(__dirname, 'propiedad-casa-familiar.html'),
         penthouseReforma: resolve(__dirname, 'propiedad-penthouse-reforma.html'),
         departamentoLujo: resolve(__dirname, 'propiedad-departamento-lujo.html'),
-        loftIndustrial: resolve(__dirname, 'propiedad-loft-industrial.html'),
-      
+        loftIndustrial: resolve(__dirname, 'propiedad-loft-industrial.html')
+      },
+      output: {
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
       }
     }
   }

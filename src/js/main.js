@@ -40,7 +40,7 @@ window.propiedadesApp = function() {
         precio: 2850000,
         imagen: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
       },
-      {
+      { 
         id: "casa-campestre",
         nombre: "Casa Campestre",
         descripcion: "4 recámaras, 3 baños",
@@ -122,7 +122,7 @@ window.propiedadesApp = function() {
           return precio > 5000000;
         default:
           return true;
-      }
+    }
     }
   }
 }
@@ -139,7 +139,7 @@ AOS.init({
 
 // Inicializa Swiper para el slider de testimonios
 document.addEventListener('DOMContentLoaded', function () {
-  const swiperTestimonios = new Swiper('.testimonios-slider', {
+  const swiperTestimonios = new Swiper('.testimonials-swiper', {
     slidesPerView: 1,
     spaceBetween: 30,
     loop: true,
@@ -147,9 +147,9 @@ document.addEventListener('DOMContentLoaded', function () {
       delay: 5000,
       disableOnInteraction: false,
     },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
+    navigation: {
+      nextEl: '.testimonials-next',
+      prevEl: '.testimonials-prev',
     },
     breakpoints: {
       640: {
