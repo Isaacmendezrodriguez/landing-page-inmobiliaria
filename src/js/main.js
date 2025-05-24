@@ -101,7 +101,9 @@ window.propiedadesApp = function() {
       return [...this.propiedadesDestacadas, ...this.propiedadesAdicionales];
     },
     propiedadesFiltradas() {
-      if (window.location.pathname === '/index.html') {
+      const path = window.location.pathname;
+      // Verifica si estamos en la página principal (tanto en desarrollo como en producción)
+      if (path === '/' || path === '/index.html' || path.endsWith('index.html')) {
         return this.propiedadesDestacadas;
       }
       return this.propiedades.filter(propiedad => {
@@ -122,7 +124,7 @@ window.propiedadesApp = function() {
           return precio > 5000000;
         default:
           return true;
-    }
+      }
     }
   }
 }
