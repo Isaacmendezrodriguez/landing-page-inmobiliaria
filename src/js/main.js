@@ -16,135 +16,162 @@ window.Alpine = Alpine;
 // App de propiedades para el filtro
 window.propiedadesApp = function() {
   return {
-    ciudadSeleccionada: '',
-    precioMin: '',
-    precioMax: '',
-    propiedades: [
+    filtros: {
+      tipo: '',
+      precio: '',
+      ubicacion: ''
+    },
+    propiedadesDestacadas: [
       { 
-        id: "casa-moderna", // ID para la primera
+        id: "casa-moderna",
         nombre: "Casa Moderna",
         descripcion: "3 recámaras, 2 baños",
-        ciudad: "CDMX",
-        precio: 3200000,
-        imagen: "/images/propiedades/casa-moderna.webp",
-        imagenes: [
-          "/images/propiedades/casa-moderna.webp", // Puedes incluir la principal aquí también
-          "/images/propiedades/casa-moderna/sala.webp",
-          "/images/propiedades/casa-moderna/cocina.webp",
-          "/images/propiedades/casa-moderna/recamara1.webp",
-          "/images/propiedades/casa-moderna/jardin.webp"
-          // Añade más rutas si tienes más imágenes para Casa Moderna
-        ],
-        
-
+        ciudad: "Polanco",
+        tipo: "casa",
+        precio: 3250000,
+        imagen: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
       },
-      { 
-        id: "casa-campestre", // <--- AÑADE ESTE ID
-        nombre: "Casa Campestre",
-        descripcion: "Jardín amplio, exc clima",
-        ciudad: "Querétaro",
-        precio: 2100000,
-        imagen: "/images/propiedades/casa-campestre.webp"
-      },
-      { 
-        id: "casa-minimalista", // <--- AÑADE ESTE ID
+      {
+        id: "casa-minimalista",
         nombre: "Casa Minimalista",
-        descripcion: "Diseño moderno, 2 niveles",
-        ciudad: "CDMX",
+        descripcion: "2 recámaras, 2.5 baños",
+        ciudad: "Condesa",
+        tipo: "casa",
         precio: 2850000,
-        imagen: "/images/propiedades/casa-minimalista.webp"
+        imagen: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: "casa-campestre",
+        nombre: "Casa Campestre",
+        descripcion: "4 recámaras, 3 baños",
+        ciudad: "Valle de Bravo",
+        tipo: "casa",
+        precio: 4500000,
+        imagen: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
       }
     ],
-    get ciudades() {
-      return [...new Set(this.propiedades.map(p => p.ciudad))];
+    propiedadesAdicionales: [
+      {
+        id: "departamento-lujo",
+        nombre: "Departamento de Lujo",
+        descripcion: "3 recámaras, 3.5 baños",
+        ciudad: "Polanco",
+        tipo: "departamento",
+        precio: 4500000,
+        imagen: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500"
+      },
+      {
+        id: "penthouse-reforma",
+        nombre: "Penthouse en Reforma",
+        descripcion: "4 recámaras, 4.5 baños",
+        ciudad: "Reforma",
+        tipo: "departamento",
+        precio: 6500000,
+        imagen: "https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?w=500"
+      },
+      {
+        id: "loft-industrial",
+        nombre: "Loft Industrial",
+        descripcion: "1 recámara, 1.5 baños",
+        ciudad: "Santa Fe",
+        tipo: "departamento",
+        precio: 2800000,
+        imagen: "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=500"
+      },
+      {
+        id: "casa-familiar",
+        nombre: "Casa Familiar",
+        descripcion: "4 recámaras, 3.5 baños",
+        ciudad: "Coyoacán",
+        tipo: "casa",
+        precio: 5200000,
+        imagen: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500"
+      },
+      {
+        id: "casa-playa",
+        nombre: "Casa de Playa",
+        descripcion: "3 recámaras, 3.5 baños",
+        ciudad: "Acapulco",
+        tipo: "casa",
+        precio: 7800000,
+        imagen: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=500"
+      }
+    ],
+    get propiedades() {
+      return [...this.propiedadesDestacadas, ...this.propiedadesAdicionales];
     },
     propiedadesFiltradas() {
-      return this.propiedades.filter(p => {
-        const ciudadOK    = !this.ciudadSeleccionada || p.ciudad === this.ciudadSeleccionada;
-        const precioMinOK = !this.precioMin          || p.precio >= this.precioMin;
-        const precioMaxOK = !this.precioMax          || p.precio <= this.precioMax;
-        return ciudadOK && precioMinOK && precioMaxOK;
+      if (window.location.pathname === '/index.html') {
+        return this.propiedadesDestacadas;
+      }
+      return this.propiedades.filter(propiedad => {
+        const cumpleTipo = !this.filtros.tipo || propiedad.tipo === this.filtros.tipo;
+        const cumplePrecio = !this.filtros.precio || this.cumplePrecio(propiedad.precio, this.filtros.precio);
+        const cumpleUbicacion = !this.filtros.ubicacion || propiedad.ciudad.toLowerCase().includes(this.filtros.ubicacion.toLowerCase());
+        
+        return cumpleTipo && cumplePrecio && cumpleUbicacion;
       });
     },
-    limpiarFiltros() {
-      this.ciudadSeleccionada = '';
-      this.precioMin          = '';
-      this.precioMax          = '';
+    cumplePrecio(precio, rango) {
+      switch(rango) {
+        case 'menos-3m':
+          return precio < 3000000;
+        case '3m-5m':
+          return precio >= 3000000 && precio <= 5000000;
+        case 'mas-5m':
+          return precio > 5000000;
+        default:
+          return true;
+      }
     }
-  };
-};
+  }
+}
 
-// Componente de detalle de propiedad
-window.detallePropiedad = function() {
-  return {
-    nombre:   '',
-    imagenes: [],
-    init() {
-      // Carga la primera propiedad por defecto
-      const primera = window.propiedadesApp().propiedades[0];
-      this.nombre   = primera.nombre;
-      this.imagenes = primera.imagenes || [primera.imagen];
-
-      // Inicializa Swiper para el detalle
-      new Swiper('.mySwiper', {
-        loop: true,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-      });
-    }
-  };
-};
-
-// Arranca Alpine y AOS
+// Inicializa Alpine.js
 Alpine.start();
+
+// Inicializa AOS
 AOS.init({
-  duration: 1000,
-  once:     true
+  duration: 800,
+  offset: 100,
+  once: true
 });
 
-// SLIDER AUTOMÁTICO DE TESTIMONIOS
-document.addEventListener("DOMContentLoaded", () => {
-  const track = document.getElementById("testimonial-track");
-  const next  = document.getElementById("next-testimonial");
-  const prev  = document.getElementById("prev-testimonial");
-
-  if (!track || !next || !prev) return;
-
-  const totalSlides = track.children.length;
-  let current = 0;
-
-  function updateSlider(idx) {
-    track.style.transform = `translateX(-${idx * 100}%)`;
-  }
-
-  next.addEventListener("click", () => {
-    current = (current + 1) % totalSlides;
-    updateSlider(current);
-    resetAutoSlide();
+// Inicializa Swiper para el slider de testimonios
+document.addEventListener('DOMContentLoaded', function () {
+  const swiperTestimonios = new Swiper('.testimonios-slider', {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+      },
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      },
+    },
   });
-
-  prev.addEventListener("click", () => {
-    current = (current - 1 + totalSlides) % totalSlides;
-    updateSlider(current);
-    resetAutoSlide();
-  });
-
-  let autoSlide = setInterval(() => {
-    current = (current + 1) % totalSlides;
-    updateSlider(current);
-  }, 5000);
-
-  function resetAutoSlide() {
-    clearInterval(autoSlide);
-    autoSlide = setInterval(() => {
-      current = (current + 1) % totalSlides;
-      updateSlider(current);
-    }, 5000);
-  }
 });
+
+// Función para manejar el detalle de propiedad
+window.detallePropiedad = function(id) {
+  return {
+    propiedad: null,
+    init() {
+      const app = window.propiedadesApp();
+      this.propiedad = app.propiedades.find(p => p.id === id);
+    }
+  }
+}

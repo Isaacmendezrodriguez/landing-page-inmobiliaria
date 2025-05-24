@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/css/style.css" /> 
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Casa Familiar | Vivienda Ideal</title>
+    <meta name="description" content="Amplia casa familiar con jardín, 4 recámaras y espacios perfectos para toda la familia en Coyoacán.">
+
+    <meta property="og:title" content="Casa Familiar en Venta | Vivienda Ideal" />
+    <meta property="og:description" content="Hermosa casa con 4 recámaras y amplio jardín en Coyoacán." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500" />
+    <meta property="og:url" content="https://tusitio.com/propiedad-casa-familiar.html" />
+    <meta name="twitter:card" content="summary_large_image" />
+</head>
+
+<body x-data="detallePropiedad('casa-familiar')" class="bg-gray-50 text-gray-900 font-sans">
+
+<header class="bg-white shadow sticky top-0 z-50" x-data="{ open: false }">
+  <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+    <a href="/index.html" class="text-2xl font-bold text-blue-800">Vivienda Ideal</a>
+
+    <button 
+      @click="open = !open"
+      class="text-blue-800 md:hidden focus:outline-none"
+      :aria-expanded="open.toString()"
+      aria-controls="nav-principal-detalle"
+      aria-label="Alternar menú de navegación"
+    >
+      <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <nav 
+      :class="open ? 'block' : 'hidden'" 
+      id="nav-principal-detalle"
+      class="absolute md:static bg-white left-0 w-full top-full mt-2 md:mt-0 md:flex md:items-center md:space-x-6 md:w-auto md:space-y-0 space-y-4 px-4 md:px-0 py-4 md:py-0 z-40 shadow md:shadow-none"
+    >
+      <ul class="flex flex-col md:flex-row gap-6 md:gap-10 text-base md:text-lg font-medium">
+        <li><a href="/index.html" class="hover:text-blue-800">Inicio</a></li>
+        <li><a href="/propiedades.html" class="hover:text-blue-800">Propiedades</a></li>
+        <li><a href="/index.html#contacto" class="hover:text-blue-800">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="py-12 md:py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-8">
+      <a href="/propiedades.html" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Volver a Propiedades
+      </a>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-blue-800 mt-4">Casa Familiar</h1>
+      <p class="text-lg text-gray-600 mt-2">Coyoacán, Ciudad de México</p>
+    </div>
+
+    <!-- Property Details -->
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
+      <div class="md:col-span-3">
+        <div class="swiper myPropertySwiper rounded-xl shadow-2xl overflow-hidden bg-gray-100" style="max-height: 600px; min-height: 400px;">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500" 
+                   alt="Vista principal casa" 
+                   class="w-full h-auto object-cover" style="max-height: 600px;" />
+            </div>
+            <div class="swiper-slide">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500" 
+                   alt="Jardín" 
+                   class="w-full h-auto object-cover" style="max-height: 600px;" />
+            </div>
+            <div class="swiper-slide">
+              <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=500" 
+                   alt="Sala de estar" 
+                   class="w-full h-auto object-cover" style="max-height: 600px;" />
+            </div>
+            <div class="swiper-slide">
+              <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=500" 
+                   alt="Cocina" 
+                   class="w-full h-auto object-cover" style="max-height: 600px;" />
+            </div>
+            <div class="swiper-slide">
+              <img src="https://images.unsplash.com/photo-1600573472591-ee6981cf35b6?w=500" 
+                   alt="Recámara principal" 
+                   class="w-full h-auto object-cover" style="max-height: 600px;" />
+            </div>
+          </div>
+          <div class="swiper-button-next text-blue-600 hover:text-blue-800"></div>
+          <div class="swiper-button-prev text-blue-600 hover:text-blue-800"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+      <div class="md:col-span-2 space-y-6 bg-white p-6 rounded-xl shadow-xl">
+        <div>
+          <p class="text-4xl font-bold text-blue-700">$5,200,000 MXN</p>
+          <p class="text-sm text-gray-500">Precio de Venta</p>
+        </div>
+
+        <div class="border-t pt-6 space-y-4">
+          <h2 class="text-xl font-semibold text-blue-800 mb-3">Características Principales:</h2>
+          <div class="flex items-center text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+            <span><strong>4</strong> Recámaras</span>
+          </div>
+          <div class="flex items-center text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+            </svg>
+            <span><strong>3.5</strong> Baños</span>
+          </div>
+          <div class="flex items-center text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+            </svg>
+            <span><strong>280 m²</strong> de Construcción</span>
+          </div>
+          <div class="flex items-center text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            <span><strong>150 m²</strong> de Jardín</span>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t">
+          <a href="/index.html#contacto" 
+             class="w-full block text-center bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow hover:bg-blue-700 transition duration-300">
+            Contactar para más Información
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div class="md:col-span-2 bg-white p-8 rounded-xl shadow-xl">
+        <h2 class="text-2xl font-semibold text-blue-800 mb-4">Descripción Detallada</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          Hermosa casa familiar ubicada en una de las zonas más tranquilas y tradicionales de Coyoacán. Perfecta para familias que buscan espacio, comodidad y una excelente ubicación cerca de escuelas, parques y centros comerciales.
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          La propiedad cuenta con 4 amplias recámaras, incluyendo una suite principal con vestidor y baño completo. La planta baja ofrece espacios sociales generosos, incluyendo una sala de estar, comedor formal y family room.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          El jardín de 150 m² es perfecto para actividades al aire libre y reuniones familiares, con una terraza cubierta y área de juegos. La cocina está totalmente equipada y cuenta con un desayunador informal ideal para el día a día.
+        </p>
+      </div>
+
+      <div class="md:col-span-1 bg-blue-50 p-8 rounded-xl shadow-xl">
+        <h2 class="text-2xl font-semibold text-blue-800 mb-6">Amenidades</h2>
+        <ul class="space-y-3 text-gray-700">
+          <li class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            Amplio Jardín
+          </li>
+          <li class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            Terraza Cubierta
+          </li>
+          <li class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            Área de Juegos
+          </li>
+          <li class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            Cuarto de Servicio
+          </li>
+          <li class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            2 Estacionamientos
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mb-12" data-aos="fade-up">
+      <h3 class="text-2xl font-semibold text-blue-800 mb-4">Galería de Imágenes</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500" 
+               alt="Vista principal casa" 
+               class="w-full h-32 object-cover cursor-pointer hover:scale-110 transition-transform duration-300">
+        </div>
+        <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500" 
+               alt="Jardín" 
+               class="w-full h-32 object-cover cursor-pointer hover:scale-110 transition-transform duration-300">
+        </div>
+        <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=500" 
+               alt="Sala de estar" 
+               class="w-full h-32 object-cover cursor-pointer hover:scale-110 transition-transform duration-300">
+        </div>
+        <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=500" 
+               alt="Cocina" 
+               class="w-full h-32 object-cover cursor-pointer hover:scale-110 transition-transform duration-300">
+        </div>
+        <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <img src="https://images.unsplash.com/photo-1600573472591-ee6981cf35b6?w=500" 
+               alt="Recámara principal" 
+               class="w-full h-32 object-cover cursor-pointer hover:scale-110 transition-transform duration-300">
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="text-center py-10 bg-white rounded-xl shadow-xl">
+      <h2 class="text-3xl font-bold text-blue-800 mb-4">¿Interesado en esta propiedad?</h2>
+      <p class="text-gray-700 mb-8 max-w-xl mx-auto">
+        No dejes pasar esta oportunidad única. Contáctanos hoy mismo para agendar una visita o resolver cualquier duda.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/index.html#contacto"
+           class="inline-block bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg shadow hover:bg-blue-700 transition">
+          Contactar Ahora
+        </a>
+        <a href="https://wa.me/5215512345678?text=Hola%20Vivienda%20Ideal,%20me%20interesa%20la%20Casa%20Familiar"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="inline-block bg-green-500 text-white font-semibold px-8 py-3 rounded-lg shadow hover:bg-green-600 transition">
+          <svg class="inline-block w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.52 3.48A11.9 11.9 0 0012 0C5.37 0 0 5.37 0 12a11.87 11.87 0 001.67 6.12L0 24l6.22-1.63A12 12 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.25-6.19-3.48-8.52z"/>
+          </svg>
+          Chatear por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="w-full bg-blue-800 text-white">
+  <!-- Footer content -->
+</footer>
+
+<script type="module" src="/src/js/main.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const swiperContainer = document.querySelector('.myPropertySwiper');
+    if (swiperContainer) {
+      const swiper = new Swiper('.myPropertySwiper', {
+        loop: true,
+        grabCursor: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          dynamicBullets: true,
+        },
+      });
+    }
+  });
+</script>
+
+</body>
+</html> 

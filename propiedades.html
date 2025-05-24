@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/css/style.css" /> 
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Todas las Propiedades | Vivienda Ideal</title>
+    <meta name="description" content="Explora nuestro catálogo completo de propiedades. Casas, departamentos y terrenos en las mejores ubicaciones.">
+
+    <meta property="og:title" content="Catálogo de Propiedades | Vivienda Ideal" />
+    <meta property="og:description" content="Encuentra tu próximo hogar entre nuestra selección de propiedades premium." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" />
+    <meta property="og:url" content="https://tusitio.com/propiedades.html" /> 
+    <meta name="twitter:card" content="summary_large_image" />
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans">
+
+<header class="bg-white shadow sticky top-0 z-50" x-data="{ open: false }">
+  <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+    <a href="/index.html" class="text-2xl font-bold text-blue-800">Vivienda Ideal</a>
+
+    <button 
+      @click="open = !open"
+      class="text-blue-800 md:hidden focus:outline-none"
+      :aria-expanded="open.toString()"
+      aria-controls="nav-principal"
+      aria-label="Alternar menú de navegación"
+    >
+      <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <nav 
+      :class="open ? 'block' : 'hidden'" 
+      class="absolute md:static bg-white left-0 w-full top-full mt-2 md:mt-0 md:flex md:items-center md:space-x-6 md:w-auto md:space-y-0 space-y-4 px-4 md:px-0 py-4 md:py-0 z-40 shadow md:shadow-none"
+    >
+      <ul class="flex flex-col md:flex-row gap-6 md:gap-10 text-base md:text-lg font-medium">
+        <li>
+          <a href="/index.html"
+          class="relative inline-block px-4 py-3 text-gray-700 hover:text-blue-800 transition-colors duration-300">
+          Inicio
+            <span class="absolute left-0 bottom-0 w-full h-[2px] bg-blue-800 scale-x-0 origin-left transition-transform duration-300 hover:scale-x-100"></span>
+          </a>
+        </li>
+        <li>
+          <a href="/propiedades.html" 
+          class="relative inline-block px-4 py-3 text-blue-800 font-semibold"
+          aria-current="page">
+            Propiedades
+            <span class="absolute left-0 bottom-0 w-full h-[2px] bg-blue-800"></span>
+          </a>
+        </li>
+        <li>
+          <a href="/index.html#contacto" 
+          class="relative inline-block px-4 py-3 text-gray-700 hover:text-blue-800 transition-colors duration-300">
+            Contacto
+            <span class="absolute left-0 bottom-0 w-full h-[2px] bg-blue-800 scale-x-0 origin-left transition-transform duration-300 hover:scale-x-100"></span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="py-12 md:py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-blue-800 mb-4" data-aos="fade-up">
+        Todas Nuestras Propiedades
+      </h1>
+      <p class="text-xl text-gray-600" data-aos="fade-up" data-aos-delay="100">
+        Encuentra el hogar perfecto para ti y tu familia
+      </p>
+    </div>
+
+    <div x-data="propiedadesApp()" class="mb-16">
+      <!-- Filtros -->
+      <div class="bg-white p-6 rounded-xl shadow-lg mb-8" data-aos="fade-up">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label for="tipo" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Propiedad</label>
+            <select 
+              id="tipo"
+              x-model="filtros.tipo"
+              class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            >
+              <option value="">Todos los tipos</option>
+              <option value="casa">Casa</option>
+              <option value="departamento">Departamento</option>
+              <option value="terreno">Terreno</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="precio" class="block text-sm font-medium text-gray-700 mb-2">Rango de Precio</label>
+            <select 
+              id="precio"
+              x-model="filtros.precio"
+              class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            >
+              <option value="">Cualquier precio</option>
+              <option value="0-2000000">Hasta $2,000,000</option>
+              <option value="2000000-5000000">$2,000,000 - $5,000,000</option>
+              <option value="5000000+">Más de $5,000,000</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="ubicacion" class="block text-sm font-medium text-gray-700 mb-2">Ubicación</label>
+            <select 
+              id="ubicacion"
+              x-model="filtros.ubicacion"
+              class="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            >
+              <option value="">Todas las ubicaciones</option>
+              <option value="Polanco">Polanco</option>
+              <option value="Santa Fe">Santa Fe</option>
+              <option value="Reforma">Reforma</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid de Propiedades -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <template x-if="propiedadesFiltradas().length === 0">
+          <p class="sm:col-span-2 lg:col-span-3 text-center text-gray-500 italic py-8" data-aos="fade-up">
+            No se encontraron propiedades con esos criterios.
+          </p>
+        </template>
+
+        <template x-for="(propiedad, i) in propiedadesFiltradas()" :key="propiedad.id">
+          <a :href="'/propiedad-' + propiedad.id + '.html'" 
+             class="block bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl group"
+             data-aos="fade-up"
+             :data-aos-delay="100 * (i + 1)">
+            <div class="relative pb-[56.25%] overflow-hidden">
+              <img :src="propiedad.imagen"
+                   :alt="propiedad.nombre"
+                   class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div class="absolute top-4 right-4 bg-blue-600 text-white text-sm font-semibold px-3 py-1 rounded-full">
+                <span x-text="propiedad.tipo"></span>
+              </div>
+            </div>
+            <div class="p-6 space-y-3">
+              <h3 class="text-xl font-semibold text-blue-800 line-clamp-2" x-text="propiedad.nombre"></h3>
+              <p class="text-gray-600 text-sm line-clamp-2" x-text="propiedad.descripcion"></p>
+              <div class="flex items-center text-gray-500 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span x-text="propiedad.ciudad"></span>
+              </div>
+              <div class="flex justify-between items-center pt-4">
+                <p class="text-lg font-bold text-blue-800" x-text="`$${propiedad.precio.toLocaleString('es-MX')} MXN`"></p>
+                <span class="inline-block bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg group-hover:bg-blue-700 transition-colors duration-300 text-sm">
+                  Ver Detalles
+                </span>
+              </div>
+            </div>
+          </a>
+        </template>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="w-full bg-blue-800 text-white">
+  <div class="max-w-7xl mx-auto px-8 lg:px-12 py-12 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm justify-items-center md:justify-items-start">
+    <div class="w-full md:w-auto">
+      <h3 class="text-lg font-semibold mb-4">Vivienda Ideal</h3>
+      <ul class="space-y-2">
+        <li class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          Av. Reforma 123, CDMX
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21 11.36 11.36 0 003.56.57 1 1 0 011 1v3.59a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.6a1 1 0 011 1 11.36 11.36 0 00.57 3.56 1 1 0 01-.21 1.11z"/>
+          </svg>
+          (55) 1234-5678
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M2 4h20v16H2z" fill="none"/>
+            <polyline points="2,4 12,13 22,4"/>
+            <polyline points="2,20 12,11 22,20"/>
+          </svg>
+          <a href="mailto:contacto@viviendaideal.mx" class="underline hover:text-gray-200">
+            contacto@viviendaideal.mx
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Enlaces</h3>
+      <ul class="space-y-2">
+        <li><a href="/index.html" class="hover:text-gray-300 transition">Inicio</a></li>
+        <li><a href="/propiedades.html" class="hover:text-gray-300 transition">Propiedades</a></li>
+        <li><a href="/index.html#contacto" class="hover:text-gray-300 transition">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Síguenos</h3>
+      <div class="flex items-center space-x-6">
+        <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="hover:text-gray-300 transition">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.877v-6.99h-2.54v-2.887h2.54V9.797c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.772-1.63 1.562v1.875h2.773l-.443 2.887h-2.33V21.877C18.343 21.128 22 16.991 22 12z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-gray-300 transition">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 100 10 5 5 0 000-10zm0 1.5a3.5 3.5 0 110 7 3.5 3.5 0 010-7zm5-1.75a1 1 0 100 2 1 1 0 000-2z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full bg-blue-900 py-4">
+    <p class="text-center text-xs text-white">
+      © 2025 Vivienda Ideal. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>
+
+<script type="module" src="/src/js/main.js"></script>
+</body>
+</html> 
